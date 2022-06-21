@@ -1,0 +1,57 @@
+/* Declare variables ----------------- */
+
+:root {
+  --dark: hsl(20, 7%, 65%);
+  --darker: hsl(20, 7%, 35%);
+  --light: hsl(20, 7%, 85%);
+  --bggrey: #eee;
+  --highlight: #fff;
+
+  --stripeGrad: linear-gradient(-90deg, black 0%, var(--darker) 40%, var(--darker) 60%, var(--dark) 90%, black 100%);
+  --StripeSize: 10px 20px;
+}
+
+
+/* Common ----------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Tags ----------------- */
+html,
+body,
+.wrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(var(--light) 70%, var(--darker) 100%);
+}
+
+body {
+  background-color: #f9fbfd;
+}
+
+
+
+
+/* Media Sizes ----------------- */
+
+@media (max-width: 690px) {
+  .btn {
+    font-size: 1rem;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .btn {
+    font-size: 0.8rem;
+  }
+ 
+}
