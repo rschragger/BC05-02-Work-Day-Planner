@@ -8,6 +8,9 @@
 //Other Variables required
 var varOne = [];
 
+if (localStorage.getItem('savedActivities') == null) {
+    localStorage.setItem('savedActivities', JSON.stringify({}))
+};
 
 // Functions ---------------------------------------------------------
 function init() {
@@ -19,22 +22,35 @@ function init() {
 }
 
 $('.saveBtn').click(function () {
-    // var thisId = $('.saveBtn').id ;
     var thisId = $(this).attr('id');
-    var thisRow = $(this).parent().attr('id');
-    var rowNo = thisRow[thisRow.length - 1];
+    console.log((thisId));
+
+    // var thisRow = $(this).parent().attr('id');
+    var rowNo = thisId[thisId.length - 1];
 
     var formText = $('#FormControlText' + rowNo).val();
-    var thisRowData = {
-        thisRow : formText ,
-}
-console.log((thisRowData))
+    var thisRowData = [rowNo, formText]
+    console.log((thisRowData));
+    formToLocal(thisRowData);
+
 })
 
-function formToLocal(passedData){
+function formToLocal(passedData) {
     var savedFormData = JSON.parse(localStorage.getItem('savedActivities'));
-var thisKey = passedData.key();
+    var rowN = passedData[0];
+    var thisValue = passedData[1];
+    // if (savedFormData.thisKey != null) {
+    //     savedFormData.thisKey = thisValue;
+    // } else {
+    //     savedFormData.thisKey = thisValue;
+    //     // savedFormData.push({ [thisKey]: thisValue });
+    // };
+    // savedFormData.(thisKey.val()) = thisValue;
+    eval('savedFormData.row' + rowN + ' = thisValue');
 
+    localStorage.setItem('savedActivities', JSON.stringify(savedFormData));
+
+    console.log(savedFormData);
 
 
 }
