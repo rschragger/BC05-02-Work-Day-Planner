@@ -32,7 +32,6 @@ $('.saveBtn').click(function () {
     var thisRowData = [rowNo, formText]
     console.log((thisRowData));
     formToLocal(thisRowData);
-
 })
 
 function formToLocal(passedData) {
@@ -52,7 +51,16 @@ function formToLocal(passedData) {
 
     console.log(savedFormData);
 
+}
 
+function localToForm(){
+    var savedFormData = JSON.parse(localStorage.getItem('savedActivities'));
+    if(savedFormData==null){
+        formToLocal('')
+        return
+        }
+        
+    }
 }
 
 init()
