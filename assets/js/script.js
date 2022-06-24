@@ -1,15 +1,15 @@
 //Create variables ---------------------------------------------------------
 //var IDs
 //Time (moment) variables
-var startTimeInt = 20; //9am is basis
+var startTimeInt = 9; //9am is basis
 var hourInt = 60 * 60 * 1000; //to make adding an hour clearer
 
 //Note below are established here to be global and will be refreshed in functions
-var StartOfDay = moment().startOf('day'); //12am today
-var startTime = moment(StartOfDay).add(startTimeInt, 'hours');
+var startOfDay = moment().startOf('day'); //12am today
+var startTime = moment(startOfDay).add(startTimeInt, 'hours');
 
 //Row HTML
-var rowCount = 8 //8 rows required
+var rowCount = 9 //9 rows required for 9-5
 var rowHMTL = `      <!--Start Row---------------->
 <div class="row" id="row^^">
   <div class="col-2 hour" id="hour^^"></div>
@@ -59,7 +59,8 @@ function localToForm() {
     }
 
     savedFormData.forEach(function (value, key) {
-        var valNo = key[key.length - 1];
+        // var valNo = key[key.length - 1];
+        var valNo = key.replace('row','');
         if ($('#' + key).val() != undefined) {
             $('#FormControlText' + valNo).val(value)
         }
@@ -71,23 +72,29 @@ function makeRows() {
     $('.time-block').text('');
     //work through tenses-past, present, future
 
-    for (i = 0; i < rowCount; i++) {
+    for (x = 0; x < rowCount; x++) {
+        var i = x + startTimeInt;
+        var tenseI = i ;
+        if (i > 23) {
+            i = i - 23;
+        }
 
         var newText = rowHMTL.replaceAll('^^', i);
-        var thisTense = establishTense(i);
+        var thisTense = establishTense(tenseI);
         var newText = newText.replaceAll('tense', thisTense);
 
         $('.time-block').append(newText);
         // Add time
-        var rowTime = moment(startTime).add(i, 'hours');
+        // var rowTime = moment(startTime).add(i, 'hours');
+        var rowTime = moment(startOfDay).add(i, 'hours');
         $('#hour' + i).text(rowTime.format('hA'))
     }
-    initBtn() ;
+    initBtn();
 
 }
 
 function establishTense(rowNo) {
-    var rowTime = moment(startTime).add(rowNo, 'hours');
+    var rowTime = moment(startOfDay).add(rowNo, 'hours');
     if (moment(rowTime).format('YMMDDHH') == moment().format('YMMDDHH')) {
         return 'present';
     } else if (moment(rowTime).format('YMMDDHH') < moment().format('YMMDDHH')) {
@@ -99,19 +106,21 @@ function establishTense(rowNo) {
 }
 
 //Events ---------------------------------
-function initBtn(){
-$('.saveBtn').click(function () {
-    var thisId = $(this).attr('id');
-    console.log((thisId));
+function initBtn() {
+    $('.saveBtn').click(function () {
+        var thisId = $(this).attr('id');
+        console.log((thisId));
 
-    // var thisRow = $(this).parent().attr('id');
-    var rowNo = thisId[thisId.length - 1];
+        // var thisRow = $(this).parent().attr('id');
+        //var rowNo = thisId[thisId.length - 1];
+        var rowNo = thisId.replace('btn','');
 
-    var formText = $('#FormControlText' + rowNo).val();
-    var thisRowData = [rowNo, formText]
-    console.log((thisRowData));
-    formToLocal(thisRowData);
-})}
+        var formText = $('#FormControlText' + rowNo).val();
+        var thisRowData = [rowNo, formText]
+        console.log((thisRowData));
+        formToLocal(thisRowData);
+    })
+}
 
 //Initialise ----------------------------
 function init() {

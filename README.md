@@ -15,9 +15,9 @@ Demonstrate understanding of Bootstrap and JQuery by making a day planner
 
 ## Installation
 
-Access to website at *** and Javascript running is all that is required.
+Access to website at https://rschragger.github.io/BC05-02-Work-Day-Planner/ and Javascript running in browser is all that is required.
 
-Github page at 
+Github page at https://github.com/rschragger/BC05-02-Work-Day-Planner
 
 ## Usage
 
@@ -31,17 +31,18 @@ The home screen has
 
 [Google](google.com) and many Javascript references in [w3schools](https://www.w3schools.com) and [MDN(Mozilla Dev Network)](https://developer.mozilla.org/en-US/) were used frequently to research topics and syntax used.
 
-Bootstrap
+[Bootstrap](https://getbootstrap.com) - HTML Library
 
-JQuery
+[JQuery](https://jquery.com/) - JavaScript Library
 
-Sounds sourced from https://freesound.org/.
-Wrong answer - https://freesound.org/people/Jacco18/sounds/419023/#
-Correct answer - https://freesound.org/people/LittleRainySeasons/sounds/335908/
-
+[Moment JS](https://momentjs.com/) - Manipulation of time and date information
 
 ## License
 
 © Copyright Reeve Schragger 2022
 
 ## Features
+- Rows are generated through a script to allow for future addition of features
+    - Start time can be updated in JS
+    - Number of rows can be updated in JS
+- Uses Bootstrap, JQuery and MomentJS libraries to allow for rapid programming
