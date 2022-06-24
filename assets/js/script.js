@@ -1,9 +1,13 @@
 //Create variables ---------------------------------------------------------
 //var IDs
-//defaults
-// var defaultVals = {
+//Time (moment) variables
+var startTimeInt = 9 ; //9am is basis
+var hourInt = 60*60*1000 ; //to make adding an hour clearer
 
-// }
+//Note below are established here to be global and will be refreshed in functions
+var StartOfDay = moment().startOf('day'); //12am today
+var startTime = moment(StartOfDay + (startTimeInt * hourInt)); 
+
 
 //Other Variables required
 var varOne = [];

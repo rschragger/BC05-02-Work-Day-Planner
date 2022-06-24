@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test items</title>
+
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <!-- jQuery  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Moment  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!-- CSS Testing Section -->
+    <style>
+        * {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1;
+        }
+    </style>
+</head>
+
+<!-- HTML testing section  -->
+
+<body>
+    <p id="test">Test</p>
+</body>
+<!-- Javascript testing section -->
+<script>
+    // moment().valueOf()
+    // 1655990499819
+    // moment(1655990499819).toString()
+    // 'Thu Jun 23 2022 23:21:39 GMT+1000'
+    // moment('23/6/22 23','DD/MM/YY HH').valueOf()
+    // 1655989200000
+
+//     var obj =
+//     [ { "row": { "time": "1655978400000", "text": "text for row 23/6/22 2000" } }, 
+//   { "row": { "time": "1655989200000", "text": "text for row 23/6/22 2300" } } ]
+
+  var obj =
+    [ { "time": "1655978400000", "text": "text for row 23/6/22 2000" } , 
+  { "time": "1655989200000", "text": "text for row 23/6/22 2300" }  ]
+
+
+    // var toWrite = obj.row.time[0];
+
+    toWrite = obj[0].row ;
+
+    
+
+
+    var index = obj.findIndex(obj => obj.time=="1655989200000");
+
+    var toWrite = obj[index].text ;
+
+document.getElementById('test').textContent = toWrite;
+
+//make the time
+// moment(moment('24/6/22 09','DD/MM/YY HH')+(1000*60*60)).format('HHa')
+var nowVar = moment();
+var startTimeInt = 9 ; //9am
+var hourInt = 60*60*1000 ;
+var StartOfDay = moment().startOf('day');
+var startTime = moment(StartOfDay + (startTimeInt * hourInt))
+console.log(moment(startTime).toString())
+</script>
+
+</html>
