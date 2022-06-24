@@ -66,7 +66,8 @@ var nowVar = moment();
 var startTimeInt = 9 ; //9am
 var hourInt = 60*60*1000 ;
 var StartOfDay = moment().startOf('day');
-var startTime = moment(StartOfDay + (startTimeInt * hourInt))
+var startTime = moment(StartOfDay).add(startTimeInt,'hours')
+// var startTime = moment(StartOfDay + (startTimeInt * hourInt));
 console.log(moment(startTime).toString())
 </script>
 
