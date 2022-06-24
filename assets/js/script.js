@@ -8,10 +8,22 @@ var hourInt = 60 * 60 * 1000; //to make adding an hour clearer
 var StartOfDay = moment().startOf('day'); //12am today
 var startTime = moment(StartOfDay).add(startTimeInt, 'hours');
 
+//Row HTML
+var rowCount = 8 //8 rows required
+var rowHMTL = `      <!--Start Row---------------->
+<div class="row" id="row^^">
+  <div class="col-2 hour tense" id="hour^^"></div>
+  <textarea class="form-control col-8 description tense" id="FormControlText^^" rows="2"></textarea>
+  <div class="col-2 fas fa-save saveBtn" id="btn^^">
+  </div>
+</div>
+<!--End Row---------------->`
+
 
 //Other Variables required
 var varOne = [];
 
+// Var local storage
 if (localStorage.getItem('savedActivities') == null) {
     localStorage.setItem('savedActivities', JSON.stringify({}))
 };
@@ -50,9 +62,17 @@ function localToForm() {
         var valNo = key[key.length - 1];
         if ($('#' + key).val() != undefined) {
             $('#FormControlText' + valNo).val(value)
-        } 
+        }
     })
 
+}
+
+function makeRows() {
+    $('.time-block').text('');
+    for (i = 0; i < rowCount; i++) {
+       var newText = rowHMTL.replaceAll('^^', i);
+        $('.time-block').append(newText);
+    }
 }
 
 //Events ---------------------------------
