@@ -1,7 +1,7 @@
 //Create variables ---------------------------------------------------------
 //var IDs
 //Time (moment) variables
-var startTimeInt = 9; //9am is basis
+var startTimeInt = 20; //9am is basis
 var hourInt = 60 * 60 * 1000; //to make adding an hour clearer
 
 //Note below are established here to be global and will be refreshed in functions
@@ -12,7 +12,7 @@ var startTime = moment(StartOfDay).add(startTimeInt, 'hours');
 var rowCount = 8 //8 rows required
 var rowHMTL = `      <!--Start Row---------------->
 <div class="row" id="row^^">
-  <div class="col-2 hour tense" id="hour^^"></div>
+  <div class="col-2 hour" id="hour^^"></div>
   <textarea class="form-control col-8 description tense" id="FormControlText^^" rows="2"></textarea>
   <div class="col-2 fas fa-save saveBtn" id="btn^^">
   </div>
@@ -69,13 +69,37 @@ function localToForm() {
 
 function makeRows() {
     $('.time-block').text('');
+    //work through tenses-past, present, future
+
     for (i = 0; i < rowCount; i++) {
-       var newText = rowHMTL.replaceAll('^^', i);
+
+        var newText = rowHMTL.replaceAll('^^', i);
+        var thisTense = establishTense(i);
+        var newText = newText.replaceAll('tense', thisTense);
+
         $('.time-block').append(newText);
+        // Add time
+        var rowTime = moment(startTime).add(i, 'hours');
+        $('#hour' + i).text(rowTime.format('hA'))
     }
+    initBtn() ;
+
+}
+
+function establishTense(rowNo) {
+    var rowTime = moment(startTime).add(rowNo, 'hours');
+    if (moment(rowTime).format('YMMDDHH') == moment().format('YMMDDHH')) {
+        return 'present';
+    } else if (moment(rowTime).format('YMMDDHH') < moment().format('YMMDDHH')) {
+        return 'past';
+    } else {
+        return 'future';
+    }
+
 }
 
 //Events ---------------------------------
+function initBtn(){
 $('.saveBtn').click(function () {
     var thisId = $(this).attr('id');
     console.log((thisId));
@@ -87,7 +111,7 @@ $('.saveBtn').click(function () {
     var thisRowData = [rowNo, formText]
     console.log((thisRowData));
     formToLocal(thisRowData);
-})
+})}
 
 //Initialise ----------------------------
 function init() {
@@ -96,7 +120,8 @@ function init() {
         // var tBlock = $('#currentTime');
         $('#currentTime').text(moment().format("dddd, Do MMMM YYYY hh:mm a"));
     }, 1000 * 60); //fires every minute, does not need to stop
-    localToForm() //adds data to the forms
+    makeRows();
+    localToForm();//adds data to the forms
 }
 
 init()

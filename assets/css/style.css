@@ -40,11 +40,15 @@ textarea {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  font-weight: 500;
 }
 
 .past {
   background-color: #d3d3d3;
-  color: white;
+  /* color: white; */
 }
 
 .present {
@@ -54,7 +58,7 @@ textarea {
 
 .future {
   background-color: #77dd77;
-  color: white;
+  /* color: white; */
 }
 
 .tense{/* for testing */
@@ -69,21 +73,26 @@ textarea {
   background-color: #06aed5;
   color: white;
 
-  font-size: 30px;
+  font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-}
 
-.saveBtn i {
+/* .saveBtn i {
   font-size: 30px;
   text-align: center;
   padding: auto;
+} */
+
+.saveBtn:hover{
+  font-size: 30px;
+  background-color: #04a2c5;
+  transition: all 0.3s ease-in-out;
 }
 
-.saveBtn i:hover {
-  font-size: 20px;
-  transition: all 0.3s ease-in-out;
+.saveBtn:active{
+  font-size: 27px;
+  background-color: #0386a3;
 }
