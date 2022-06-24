@@ -43,23 +43,15 @@ function localToForm() {
 
     if (savedFormData == null) {
         formToLocal('')
-        return console.log('no data');
+        // return console.log('no data');
     }
 
-    // for (let rNo in savedFormData) {
-    //     $('#' + rNo).text = savedFormData.get(rNo);
-    // }
-
     savedFormData.forEach(function (value, key) {
-        // text += key + ' = ' + value + "<br>"
-        // $('#' + key).text = value ;
-var valNo = key[key.length-1];
- $('#FormControlText'+valNo).val(value)
+        var valNo = key[key.length - 1];
+        if ($('#' + key).val() != undefined) {
+            $('#FormControlText' + valNo).val(value)
+        } 
     })
-
-    // for(rNo=0 ; rNo < savedFormData.length ; rNo++){
-    //     $('row'+rNo).text = eval('savedFormData.row' + rNo);
-
 
 }
 
@@ -84,6 +76,7 @@ function init() {
         // var tBlock = $('#currentTime');
         $('#currentTime').text(moment().format("dddd, Do MMMM YYYY hh:mm a"));
     }, 1000 * 60); //fires every minute, does not need to stop
+    localToForm() //adds data to the forms
 }
 
 init()
