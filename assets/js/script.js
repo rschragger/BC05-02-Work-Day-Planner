@@ -2,6 +2,7 @@
 //var IDs
 //Time (moment) variables
 var startTimeInt = 9; //9am is basis
+var checkTime = 0; //this checks to run hourly timer
 var hourInt = 60 * 60 * 1000; //to make adding an hour clearer
 
 //Note below are established here to be global and will be refreshed in functions
@@ -135,7 +136,7 @@ function onHourTenseReset() {
         $('#FormControlText' + i).removeClass('past present future tense').addClass(thisTense)
     }
     console.log('onHourTenseReset has performed at ' + moment().toString())
-    fireOnHour()
+    // fireOnHour()
 }
 
 function setCurrentTime() {
@@ -143,6 +144,11 @@ function setCurrentTime() {
         // var tBlock = $('#currentTime');
         $('#currentTime').text(moment().format("dddd, Do MMMM YYYY h:mm a"));
         // console.log('currentTime() has performed at '+ moment().toString())
+
+        if(checkTime != moment().format('h')){
+            onHourTenseReset();
+             checkTime = moment().format('h')
+        }
     }, 1000 * 60); //fires every minute, does not need to stop
 
 }
