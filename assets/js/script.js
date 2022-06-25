@@ -108,13 +108,11 @@ function establishTense(rowNo) {
 function fireOnHour() {
     var thisTime = moment();
     var endHour = moment(thisTime).endOf('hour');
-    var secondsToEnd = moment(endHour).format('X') - moment().format('X')+1 ; //initiates, should work even if fired at exactly the hour. '.format('X') ' is Unix seconds format (lowercase x is milliseconds) so can be used in interval. 
+    var msecondsToEnd = moment(endHour).format('x') - moment().format('x') + 1; //initiates, should work even if fired at exactly the hour. '.format('x') ' is Unix milliseconds format (lowercase x is milliseconds) so can be used in interval. 
     //Had to add a second as it was going off 1 second too soon
     console.log('fireOnHour has performed at ' + moment().toString())
     //We aren't using setInterval as the first interval is not going to be the full hour
-    setTimeout(function () {
-        onHourTenseReset();
-    }, secondsToEnd * 1000);
+    setTimeout(onHourTenseReset, msecondsToEnd );
 
 }
 
@@ -126,11 +124,10 @@ function onHourTenseReset() {
             i = i - 23;
         }
         var thisTense = establishTense(tenseI);
-        //str.replaceAll(/dog|cat/gi,'fish') from https://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
-        var regExExpr = `/past|present|future/gi`;
+        // var tenseList = 'past present future tense';
 
-        //https://stackoverflow.com/questions/5553551/jquery-change-class-by-given-ids
-        $('#FormControlText' + i).removeClass(eval(regExExpr)).addClass(thisTense)
+        //https://stackoverflow.com/questions/5553551/jquery-change-class-by-given-ids & 1485647/removing-multiple-classes-jquery
+        $('#FormControlText' + i).removeClass('past present future tense').addClass(thisTense)
     }
     fireOnHour()
 }
