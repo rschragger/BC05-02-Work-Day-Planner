@@ -12,9 +12,9 @@ var startTime = moment(startOfDay).add(startTimeInt, 'hours');
 var rowCount = 9 //9 rows required for 9-5
 var rowHMTL = `      <!--Start Row---------------->
 <div class="row" id="row^^">
-  <div class="col-2 hour" id="hour^^"></div>
-  <textarea class="form-control col-8 description tense" id="FormControlText^^" rows="2"></textarea>
-  <div class="col-2 fas fa-save saveBtn" id="btn^^">
+  <div class="col-1 hour" id="hour^^"></div>
+  <textarea class="form-control col-10 description tense" id="FormControlText^^" rows="2"></textarea>
+  <div class="col-1 fas fa-save saveBtn" id="btn^^">
   </div>
 </div>
 <!--End Row---------------->`
@@ -60,7 +60,7 @@ function localToForm() {
 
     savedFormData.forEach(function (value, key) {
         // var valNo = key[key.length - 1];
-        var valNo = key.replace('row','');
+        var valNo = key.replace('row', '');
         if ($('#' + key).val() != undefined) {
             $('#FormControlText' + valNo).val(value)
         }
@@ -74,7 +74,7 @@ function makeRows() {
 
     for (x = 0; x < rowCount; x++) {
         var i = x + startTimeInt;
-        var tenseI = i ;
+        var tenseI = i;
         if (i > 23) {
             i = i - 23;
         }
@@ -105,6 +105,33 @@ function establishTense(rowNo) {
 
 }
 
+function fireOnHour() {
+    var thisTime = moment();
+    var endHour = moment(thisTime).endOf('hour');
+    var secondsToEnd = moment(endHour).format('X') - moment().format('X'); //initiates, should work even if fired at exactly the hour. '.format('X') ' is Unix seconds format (lowercase x is milliseconds) so can be used in interval
+    setInterval(function () {
+        onHourTenseReset();
+    }, secondsToEnd * 1000);
+
+}
+
+function onHourTenseReset() {
+    for (x = 0; x < rowCount; x++) {
+        var i = x + startTimeInt;
+        var tenseI = i;
+        if (i > 23) {
+            i = i - 23;
+        }
+        var thisTense = establishTense(tenseI);
+        //str.replaceAll(/dog|cat/gi,'fish') from https://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
+        var regExExpr = `/past|present|future/gi`;
+
+        //https://stackoverflow.com/questions/5553551/jquery-change-class-by-given-ids
+        $('#FormControlText' + i).removeClass(eval(regExExpr)).addClass(thisTense)
+    }
+    fireOnHour()
+}
+
 //Events ---------------------------------
 function initBtn() {
     $('.saveBtn').click(function () {
@@ -113,7 +140,7 @@ function initBtn() {
 
         // var thisRow = $(this).parent().attr('id');
         //var rowNo = thisId[thisId.length - 1];
-        var rowNo = thisId.replace('btn','');
+        var rowNo = thisId.replace('btn', '');
 
         var formText = $('#FormControlText' + rowNo).val();
         var thisRowData = [rowNo, formText]
@@ -129,8 +156,10 @@ function init() {
         // var tBlock = $('#currentTime');
         $('#currentTime').text(moment().format("dddd, Do MMMM YYYY hh:mm a"));
     }, 1000 * 60); //fires every minute, does not need to stop
+    
     makeRows();
     localToForm();//adds data to the forms
+    fireOnHour(); //fires every hour, resets itself
 }
 
 init()
