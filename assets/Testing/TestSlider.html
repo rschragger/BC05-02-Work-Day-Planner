@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Slider - Range slider</title>
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  <link rel="stylesheet" href="//jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=3">
+	<link rel="stylesheet" href="//jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css?v=2">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+   
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+  <script src="//jqueryui.com/jquery-wp-content/themes/jquery/js/plugins.js"></script>
+	<script src="//jqueryui.com/jquery-wp-content/themes/jquery/js/main.js"></script>  -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    
+    <script>
+  $( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 23,
+      values: [ 9, 17 ],
+      slide: function( event, ui ) {
+        $( "#hour-slider" ).val(  ui.values[ 0 ] + ":00 - " + ui.values[ 1 ] + ":00");
+      }
+    });
+    $( "#hour-slider" ).val(  $( "#slider-range" ).slider( "values", 0 ) +
+      ":00 - " + $( "#slider-range" ).slider( "values", 1 ) + ":00");
+  } );
+  </script>
+</head>
+<body>
+ 
+<p>
+  <label for="hour-slider">Diary range:</label>
+  <input type="text" id="hour-slider" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+ 
+<div id="slider-range"></div>
+ 
+ 
+</body>
+</html>
