@@ -21,11 +21,10 @@ Github page at https://github.com/rschragger/BC05-02-Work-Day-Planner
 
 ## Usage
 
-### Initial view
-![Screenshot - Initial View](./assets/images/Home.png)<br>
-The home screen has
+### Demo video
+![Web video](./assets/video/Work%20Day%20Scheduler.gif)<br>
 
-
+[Link to movie with sound](assets/video/Work%20Day%20Scheduler.mp4)
 
 ## Credits
 
