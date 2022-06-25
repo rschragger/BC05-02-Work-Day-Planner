@@ -139,7 +139,7 @@ function setCurrentTime() {
     setInterval(function () {
         // var tBlock = $('#currentTime');
         $('#currentTime').text(moment().format("dddd, Do MMMM YYYY h:mm a"));
-        console.log('currentTime() has performed at '+ moment().toString())
+        // console.log('currentTime() has performed at '+ moment().toString())
     }, 1000 * 60); //fires every minute, does not need to stop
 
 }

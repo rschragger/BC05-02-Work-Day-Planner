@@ -22,9 +22,12 @@ Github page at https://github.com/rschragger/BC05-02-Work-Day-Planner
 ## Usage
 
 ### Demo video
+
+[Link to movie with sound](https://drive.google.com/file/d/1qQd1pH6JeOIYxBC4KjnINGje3FAoqW30/view)
+
+
 ![Web video](./assets/video/Work%20Day%20Scheduler.gif)<br>
 
-[Link to movie with sound](assets/video/Work%20Day%20Scheduler.mp4)
 
 ## Credits
 
