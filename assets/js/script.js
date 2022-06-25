@@ -12,9 +12,9 @@ var startTime = moment(startOfDay).add(startTimeInt, 'hours');
 var rowCount = 9 //9 rows required for 9-5
 var rowHMTL = `      <!--Start Row---------------->
 <div class="row" id="row^^">
-  <div class="col-1 hour" id="hour^^"></div>
-  <textarea class="form-control col-10 description tense" id="FormControlText^^" rows="2"></textarea>
-  <div class="col-1 fas fa-save saveBtn" id="btn^^">
+  <div class="col-2 col-md-1 hour" id="hour^^"></div>
+  <textarea class="col-8 col-md-10 form-control description tense" id="FormControlText^^" rows="2"></textarea>
+  <div class="col-2  col-md-1 fas fa-save saveBtn" id="btn^^">
   </div>
 </div>
 <!--End Row---------------->`
@@ -105,14 +105,19 @@ function establishTense(rowNo) {
 
 }
 
+// fireOnHour initiates, should work if fired at exactly the hour or within. 
 function fireOnHour() {
     var thisTime = moment();
     var endHour = moment(thisTime).endOf('hour');
-    var msecondsToEnd = moment(endHour).format('x') - moment().format('x') + 1; //initiates, should work even if fired at exactly the hour. '.format('x') ' is Unix milliseconds format (lowercase x is milliseconds) so can be used in interval. 
+
+   //'format('x') ' is Unix milliseconds format (lowercase x is milliseconds) so can be used in interval. 
     //Had to add a second as it was going off 1 second too soon
-    console.log('fireOnHour has performed at ' + moment().toString())
+     var msecondsToEnd = moment(endHour).format('x') - moment().format('x') + 1 ;  
+    //  msecondsToEnd = msecondsToEnd/60/2 ;//testing
+    console.log('fireOnHour has performed at ' + moment().toString() + ' - '+msecondsToEnd)
     //We aren't using setInterval as the first interval is not going to be the full hour
     setTimeout(onHourTenseReset, msecondsToEnd );
+    // setTimeout(onHourTenseReset, 5000 );
 
 }
 
@@ -129,6 +134,7 @@ function onHourTenseReset() {
         //https://stackoverflow.com/questions/5553551/jquery-change-class-by-given-ids & 1485647/removing-multiple-classes-jquery
         $('#FormControlText' + i).removeClass('past present future tense').addClass(thisTense)
     }
+    console.log('onHourTenseReset has performed at ' + moment().toString())
     fireOnHour()
 }
 
