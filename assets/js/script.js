@@ -108,8 +108,11 @@ function establishTense(rowNo) {
 function fireOnHour() {
     var thisTime = moment();
     var endHour = moment(thisTime).endOf('hour');
-    var secondsToEnd = moment(endHour).format('X') - moment().format('X'); //initiates, should work even if fired at exactly the hour. '.format('X') ' is Unix seconds format (lowercase x is milliseconds) so can be used in interval
-    setInterval(function () {
+    var secondsToEnd = moment(endHour).format('X') - moment().format('X')+1 ; //initiates, should work even if fired at exactly the hour. '.format('X') ' is Unix seconds format (lowercase x is milliseconds) so can be used in interval. 
+    //Had to add a second as it was going off 1 second too soon
+    console.log('fireOnHour has performed at ' + moment().toString())
+    //We aren't using setInterval as the first interval is not going to be the full hour
+    setTimeout(function () {
         onHourTenseReset();
     }, secondsToEnd * 1000);
 
@@ -132,6 +135,15 @@ function onHourTenseReset() {
     fireOnHour()
 }
 
+function setCurrentTime() {
+    setInterval(function () {
+        // var tBlock = $('#currentTime');
+        $('#currentTime').text(moment().format("dddd, Do MMMM YYYY h:mm a"));
+        console.log('currentTime() has performed at '+ moment().toString())
+    }, 1000 * 60); //fires every minute, does not need to stop
+
+}
+
 //Events ---------------------------------
 function initBtn() {
     $('.saveBtn').click(function () {
@@ -151,12 +163,16 @@ function initBtn() {
 
 //Initialise ----------------------------
 function init() {
-    $('#currentTime').text(moment().format("dddd, Do MMMM YYYY hh:mm a"));
-    setInterval(function () {
-        // var tBlock = $('#currentTime');
-        $('#currentTime').text(moment().format("dddd, Do MMMM YYYY hh:mm a"));
-    }, 1000 * 60); //fires every minute, does not need to stop
-    
+    $('#currentTime').text(moment().format("dddd, Do MMMM YYYY h:mm a"));
+
+    var endMin = moment().endOf('minute');
+    var msecondsToEnd = moment(endMin).format('x') - moment().format('x'); //lowercase x is milliseconds
+
+    setTimeout(function () {
+        $('#currentTime').text(moment().format("dddd, Do MMMM YYYY h:mm a"));
+        setCurrentTime();
+    }, msecondsToEnd);
+
     makeRows();
     localToForm();//adds data to the forms
     fireOnHour(); //fires every hour, resets itself

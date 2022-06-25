@@ -2,8 +2,8 @@
 A day planner to show you where you are in your day's progress
 
 ## Description
-Demonstrate understanding of Bootstrap and JQuery by making a day planner
-
+A demonstration of Bootstrap and JQuery by using a day planner and the requirements.
+Planner is set to 9am-5pm hours as a default and users can add appointments and information to an hourly table. The table rows change colour to indicate what rows have passed and which ones are presently relevant and upcoming.
 
 ## Table of Contents
 
