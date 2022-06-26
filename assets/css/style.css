@@ -62,17 +62,21 @@ textarea {
   /* color: white; */
 }
 
-.tense{/* for testing */
+.tense {
+  /* for testing */
   background-color: brown;
 }
 
-.mainHeader{
- display:flex;
- flex:wrap;
- border-bottom: 10px solid black;
+.mainHeader {
+  
+  display: flex;
+    border-bottom: 10px solid black;
+    max-width: 1200px;
+    justify-content: center;
+    margin: auto;
 }
 
-.titleHeader{
+.titleHeader {
   width: 75%;
   text-align: center;
   background-color: transparent;
@@ -81,30 +85,35 @@ textarea {
   padding: 20px;
 }
 
-.toolBox{
+.toolBox {
   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* background-color: aqua; */
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: aqua; */
 }
-.toolDiv{
+
+.toolDiv {
   display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
 }
-.toolHeader{
-margin: 10px 0px 3px 0px;
-font-size: 18px;
+
+.toolHeader {
+  margin: 10px 0px 3px 0px;
+  font-size: 18px;
 }
-.buttonRow{
-  display:inline-flex;
-  width:70%;
+
+.buttonRow {
+  display: inline-flex;
+  width: 70%;
 }
-.toolBoxBtn{
-  max-width:25% ;
+
+.toolBoxBtn {
+  max-width: 25%;
 }
-.btnInput{
+
+.btnInput {
   max-width: 50%;
   text-align: center;
 }
@@ -130,13 +139,29 @@ font-size: 18px;
   padding: auto;
 } */
 
-.saveBtn:hover{
+.saveBtn:hover {
   font-size: 30px;
   background-color: #04a2c5;
   transition: all 0.3s ease-in-out;
 }
 
-.saveBtn:active{
+.saveBtn:active {
   font-size: 27px;
   background-color: #0386a3;
+}
+
+@media screen and (max-width: 640px) {
+
+  /* @media  (max-width:576px) { */
+  .mainHeader {
+    flex-direction: column;
+  }
+
+  .toolBox {
+    margin: 5px auto;
+  }
+
+  .titleHeader {
+    margin: 5px auto;
+  }
 }
