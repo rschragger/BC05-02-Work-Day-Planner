@@ -27,7 +27,7 @@
           <p class="toolHeader">Start time</p>
           <div class="buttonRow">
             <button class="toolboxBtn" id="start-1" onclick="btnMinusPlus('s-1')">⬅️</button>
-            <input class="btnInput" type="text" name="startTime" id="startTime" value="9">
+            <input class="btnInput" type="text" onchange="inputChange(this.value, 's')" name="startTime" id="startTime" value="9">
             <button class="toolboxBtn" id="start+1" onclick="btnMinusPlus('s+1')">➡️</button>
           </div>
         </div>
@@ -36,7 +36,7 @@
           <div class="buttonRow">
             <button class="toolboxBtn" id="rows-1" onclick="btnMinusPlus('r-1')">⬅️</button>
 
-            <input class="btnInput" type="text" name="rowsInput" id="rows-input" value="9">
+            <input class="btnInput" type="text" onchange="inputChange(this.value, 'r')"  name="rowsInput" id="rows-input" value="9">
 
             <button class="toolboxBtn" id="rows+1" onclick="btnMinusPlus('r+1')">➡️</button>
           </div>

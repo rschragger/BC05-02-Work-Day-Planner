@@ -22,11 +22,11 @@ var rowHMTL = `      <!--Start Row---------------->
 //do NOT delete above
 
 //Button variables
-var startMinus = document.getElementById('start-1');
-var startPlus = document.getElementById('start+1');
+// var startMinus = document.getElementById('start-1');
+// var startPlus = document.getElementById('start+1');
 var startInput = document.getElementById('startTime');
-var rowsMinus = document.getElementById('rows-1');
-var rowsPlus = document.getElementById('rows+1');
+// var rowsMinus = document.getElementById('rows-1');
+// var rowsPlus = document.getElementById('rows+1');
 var rowsInput = document.getElementById('rows-input');
 
 //Other Variables required
@@ -82,12 +82,12 @@ function makeRows() {
     //work through tenses-past, present, future
 
     for (var x = 0; x < rowCount; x++) {
-        var iT = x + startTimeInt;
+        var iT = parseFloat(x) + parseFloat(startTimeInt);
         var tenseI = iT;
         if (iT > 23) {
-            iT = iT - 23;
+            iT = iT - 24;
         }
-// console.log('x:' + x + " iT:" + iT + ' sti:' + startTimeInt);
+        // console.log('x:' + x + " iT:" + iT + ' sti:' + startTimeInt);
         var newText = rowHMTL.replaceAll('^^', iT);
         var thisTense = establishTense(tenseI);
         var newText = newText.replaceAll('tense', thisTense);
@@ -161,15 +161,29 @@ function setCurrentTime() {
 
 }
 
-function noOfRowsLocal() {
+function startAndRowsFromLocal() {
     var noOfRows = localStorage.getItem('noOfRows');
     if (noOfRows != null) {
-        window.startTimeInt = noOfRows;
+        window.rowCount = noOfRows;
     } else {
-        noOfRows = startTimeInt;
+        noOfRows = rowCount;
     }
-    startInput.value = noOfRows;
+    rowsInput.value = parseFloat(noOfRows);
+
+    var strTime = localStorage.getItem('strTime');
+    if (strTime != null) {
+        window.startTimeInt = strTime;
+    } else {
+        strTime = startTimeInt;
+    }
+    startInput.value = parseFloat(strTime);
 }
+
+function startAndRowsToLocal() {
+    localStorage.setItem('noOfRows', rowsInput.value);
+    localStorage.setItem('strTime', startInput.value);
+}
+
 
 function btnMinusPlus(message) {
     var mesType = message[0];
@@ -177,12 +191,41 @@ function btnMinusPlus(message) {
     // console.log(mesQty);
     if (mesType == 's') { //start time
         startInput.value = parseFloat(startInput.value) + parseFloat(mesQty);
-        startTimeInt = parseFloat(startInput.value) ;
+        if (startInput.value < 0) {
+            startInput.value = 23;
+        } else if (startInput.value > 23) {
+            startInput.value = 0;
+        }
+        startTimeInt = parseFloat(startInput.value);
     } else if (mesType == 'r') { //row qty
         rowsInput.value = parseFloat(rowsInput.value) + parseFloat(mesQty);
+        if (rowsInput.value < 1) {
+            rowsInput.value = 24;
+        } else if (rowsInput.value > 24) {
+            rowsInput.value = 1;
+        }
         rowCount = parseFloat(rowsInput.value);
     }
-    makeRows()
+    makeRows();
+    localToForm();
+    startAndRowsToLocal()
+}
+
+function inputChange(inpVal, mesType) {
+    if (inpVal > 24) { inpVal = 24; } ;
+    if (inpVal < 1) { inpVal = 1; } ;
+
+    if (mesType == 's') { //start time
+        startTimeInt = parseFloat(inpVal);
+        startInput.value = startTimeInt ;
+
+    } else if (mesType == 'r') { //row qty
+        rowCount = parseFloat(inpVal);
+        rowsInput.value = rowCount ;
+    }
+    makeRows();
+    localToForm();
+    startAndRowsToLocal()
 }
 
 
@@ -206,7 +249,7 @@ function initBtn() {
 //Initialise ----------------------------
 function init() {
     //Set the number of rows and 
-
+    startAndRowsFromLocal()
     //Set the current time
     $('#currentTime').text(moment().format("dddd, Do MMMM YYYY h:mm a"));
 
