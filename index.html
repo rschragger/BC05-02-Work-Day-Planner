@@ -14,13 +14,52 @@
 </head>
 
 <body>
-  <header class="jumbotron">
-    <h1 class="display-4">Work Day Scheduler</h1>
-    <p class="lead">A simple calendar app for scheduling your work day</p>
+  <div class="mainHeader">
+    <!-- <div class=" h-45"> -->
+      <header class="titleHeader">
+        <h1 class="display-4">Work Day Scheduler</h1>
+        <p class="lead">A simple calendar app for scheduling your work day</p>
+        <p id="currentTime" class="time-block2"></p>
+      </header>
 
-    <p id="currentTime" class="time-block2"></p>
+      <div class="toolBox" id="toolBox">
+        <div class="toolDiv">
+          <p class="toolHeader">Start time</p>
+          <div class="buttonRow">
+            <button class="toolboxBtn" id="start-1" onclick="btnMinusPlus('s-1')">⬅️</button>
+            <input class="btnInput" type="text" name="startTime" id="startTime" value="9">
+            <button class="toolboxBtn" id="start+1" onclick="btnMinusPlus('s+1')">➡️</button>
+          </div>
+        </div>
+        <div class="toolDiv">
+          <p class="toolHeader">Number of Rows</p>
+          <div class="buttonRow">
+            <button class="toolboxBtn" id="rows-1" onclick="btnMinusPlus('r-1')">⬅️</button>
 
-  </header>
+            <input class="btnInput" type="text" name="rowsInput" id="rows-input" value="9">
+
+            <button class="toolboxBtn" id="rows+1" onclick="btnMinusPlus('r+1')">➡️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+  <!-- <div class="changeBox col-4  flex-wrap justify-content-center d-flex">
+    <p class="rowX p-1 m-1">Start time</p>
+     <div class="rowX p-1 m-1 d-flex"> 
+     <button class="toolboxBtn col-2" id="start-1">⬅️</button>
+     <input class="col-4" type="text" name="startTime" id="startTime" value="9">
+     <button class="toolboxBtn col-2" id="start+1">➡️</button></div>
+   <p class="rowX p-1 m-1">Number of Rows</p> 
+     <div class="rowX p-1 m-1 d-flex">  
+     <button class="toolboxBtn clo-2" id="rows-1">⬅️</button>
+     <input class="col-4"  type="text" name="startTime" id="rowChoice" value="9">
+     <button class="toolboxBtn col-2" id="rows+1">➡️</button></div>
+   </div>
+ </div>
+</div> -->
+  <!-- <div class="container col-12"></div> -->
   <div class="container">
     <!-- Timeblocks go here -->
     <div class="time-block">
@@ -35,7 +74,7 @@
       !--End Row---------------->
 
 
-  </div>
+    </div>
   </div>
   <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
 

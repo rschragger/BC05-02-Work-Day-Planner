@@ -66,6 +66,49 @@ textarea {
   background-color: brown;
 }
 
+.mainHeader{
+ display:flex;
+ flex:wrap;
+ border-bottom: 10px solid black;
+}
+
+.titleHeader{
+  width: 75%;
+  text-align: center;
+  background-color: transparent;
+  color: black;
+  border-radius: 0;
+  padding: 20px;
+}
+
+.toolBox{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: aqua; */
+}
+.toolDiv{
+  display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.toolHeader{
+margin: 10px 0px 3px 0px;
+font-size: 18px;
+}
+.buttonRow{
+  display:inline-flex;
+  width:70%;
+}
+.toolBoxBtn{
+  max-width:25% ;
+}
+.btnInput{
+  max-width: 50%;
+  text-align: center;
+}
+
 
 .saveBtn {
   border-left: 1px solid black;
