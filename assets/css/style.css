@@ -109,12 +109,12 @@ textarea {
   width: 70%;
 }
 
-.toolBoxBtn {
-  max-width: 25%;
+.toolboxBtn {
+  max-width: 30%;
 }
 
 .btnInput {
-  max-width: 50%;
+  max-width: 40%;
   text-align: center;
 }
 
@@ -152,16 +152,28 @@ textarea {
 
 @media screen and (max-width: 640px) {
 
-  /* @media  (max-width:576px) { */
   .mainHeader {
     flex-direction: column;
+    margin:2px;
+    padding:2px;
   }
-
+.toolDiv{
+  padding: 2px;
+  max-width: 100%;
+}
   .toolBox {
     margin: 5px auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
   }
 
   .titleHeader {
     margin: 5px auto;
+    padding: 5px ;
+  }
+
+  .titleHeader h1{
+    font-size: 40px;
   }
 }

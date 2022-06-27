@@ -44,7 +44,10 @@ Github page at https://github.com/rschragger/BC05-02-Work-Day-Planner
 © Copyright Reeve Schragger 2022
 
 ## Features
-- Rows are generated through a script to allow for future addition of features
-    - Start time can be updated in JS
-    - Number of rows can be updated in JS
+- Counters provided to allow for changing of:
+    - Start time can be set between 0 and 23hours (24hour time)
+    - Number of rows can be set between 1 and 24 rows    
+- Changes are saved locally so will appear after refresh
+- Each Row will identify by colour whether it is in the past, present or future. A clock in the header 
 - Uses Bootstrap, JQuery and MomentJS libraries to allow for rapid programming
+- Allows for media re-sizing
